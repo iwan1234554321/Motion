@@ -110,3 +110,56 @@ this.Motion(string id = MotionUtility.DefaultMotionID, bool replace = true)
      Останавливает абсолютно все активные анимации на данном компоненте.
    * **`this.CompleteMotion(string id)`**  
      Мгновенно завершает анимацию с указанным `id`, принудительно устанавливая конечные целевые значения.
+
+---
+
+## Пример использования
+
+Ниже представлен пример реализации комплексной асинхронной анимации. Метод выполняет параллельное изменение позиции, вращения и масштаба объекта после предварительной задержки, с возможностью переключения между Tween и Spring конфигурациями.
+
+```csharp
+using UnityEngine;
+using System.Threading.Tasks;
+using Notteam.Motion;
+
+public class MotionExample : MonoBehaviour
+{
+    [SerializeField] private Transform transformObject;
+    [SerializeField] private float delay = 0.5f;
+    [SerializeField] private Vector3 startPoint;
+    [SerializeField] private Vector3 finalPoint;
+    
+    [Header("Animation Settings")]
+    [SerializeField] private bool useSpring;
+    [SerializeField] private Playback playback = Playback.Once;
+    [SerializeField] private bool unscaledTime;
+
+    [Header("Setups")]
+    [SerializeField] private MotionStepSetupTween setupTween;
+    [SerializeField] private MotionStepSetupTween setupTween2;
+    [SerializeField] private MotionStepSetupSpring setupSpring;
+    [SerializeField] private MotionStepSetupSpring setupSpring2;
+
+    private async void PlayAsync()
+    {
+        // Асинхронное ожидание выполнения всей цепочки анимации
+        await this.Motion()
+            .OnStart(() => { Debug.Log("Start Async Animation"); })
+            .AddStepInterval(delay)
+            .AddStepParallel((t) => 
+            {
+                transformObject.rotation = Quaternion.LerpUnclamped(Quaternion.identity, Quaternion.AngleAxis(45, Vector3.forward), t);
+                transformObject.position = Vector3.LerpUnclamped(startPoint, finalPoint, t);
+            }, 
+            !useSpring ? setupTween : setupSpring)
+            .AddStepParallel((t) =>
+            {
+                transformObject.localScale = Vector3.LerpUnclamped(Vector3.one, Vector3.one * 1.2f, t);
+            }, 
+            !useSpring ? setupTween2 : setupSpring2)
+            .OnComplete(() => { Debug.Log("Stop Async Animation"); })
+            .Play(playback, unscaledTime)
+            .Await();
+    }
+}
+```
