@@ -13,7 +13,7 @@
 3. Выберите пункт **"Add package from git URL..."**.
 4. Введите следующий URL-адрес репозитория:
    ```text
-   https://gitflic.ru/project/iwan1234554321/motion.git
+   https://github.com/iwan1234554321/Motion.git
    ```
 5. Нажмите кнопку **Add**. После завершения импорта пакет будет готов к работе.
 
