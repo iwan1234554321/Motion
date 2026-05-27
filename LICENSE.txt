@@ -1,7 +1,7 @@
 ЛИЦЕНЗИОННОЕ СОГЛАШЕНИЕ / LICENSE AGREEMENT
 
 Правообладатель / Автор: Notteam
-Официальный репозиторий: https://gitflic.ru/project/iwan1234554321/motion
+Официальный репозиторий: https://github.com/iwan1234554321/Motion.git
 Контактный Email: iwan1234554321@gmail.com
 
 1. ОБЩИЕ УСЛОВИЯ И ОБЯЗАТЕЛЬНОЕ АВТОРСТВО (ATTRIBUTION)
