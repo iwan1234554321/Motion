@@ -1,0 +1,11 @@
+{
+    "name": "com.notteam.motion",
+    "displayName": "Motion",
+    "version": "1.0.0",
+    "unity": "2021.3",
+    "description": "Инструмент для реализации любой, промежуточной анимации, с поддержкой пружинной физики для использования в движке Unity",
+    "author": {
+        "name": "Notteam",
+        "email": "iwan1234554321@gmail.com"
+    }
+}
